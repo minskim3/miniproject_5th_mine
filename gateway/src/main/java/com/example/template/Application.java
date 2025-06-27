@@ -2,12 +2,11 @@ package thminiprojthebookminseo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.security.reactive.ReactiveUserDetailsServiceAutoConfiguration;
+import org.springframework.cloud.gateway.filter.headers.XForwardedHeadersFilter;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
 
-@SpringBootApplication(
-    exclude = ReactiveUserDetailsServiceAutoConfiguration.class
-)
+@SpringBootApplication
 public class Application {
 
     public static ApplicationContext applicationContext;

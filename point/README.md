@@ -1,67 +1,19 @@
-# point
+#### Integration: As a part of the Spring ecosystem, Spring Security integrates seamlessly with other Spring projects.
 
-## Running in local development environment
+#### Flexibility: It supports a variety of authentication mechanisms (like Basic, OAuth, LDAP, JDBC, etc.) and allows for easy implementation of custom security requirements.
 
-```
-mvn spring-boot:run
-```
+#### Method-level Security: You can configure access control at the method level, enabling finely-grained security policies.
 
-## Packaging and Running in docker environment
+#### Session Management: It offers various session management features such as session fixation protection, session timeouts, and concurrent session controls.
 
-```
-mvn package -B -DskipTests
-docker build -t username/point:v1 .
-docker run username/point:v1
-```
+#### CSRF Protection: It includes built-in mechanisms to guard against Cross-Site Request Forgery (CSRF) attacks.
 
-## Push images and running in Kubernetes
+#### CORS Support: Configuration for Cross-Origin Resource Sharing (CORS) can be easily set up.
 
-```
-docker login 
-# in case of docker hub, enter your username and password
+#### OAuth 2.0 & OpenID Connect Support: It makes implementing and integrating modern authentication and authorization protocols straightforward.
 
-docker push username/point:v1
-```
+#### Community & Resources: Spring Security is backed by a vibrant community and a wealth of documentation, tutorials, and guides.
 
-Edit the deployment.yaml under the /kubernetes directory:
-```
-    spec:
-      containers:
-        - name: point
-          image: username/point:latest   # change this image name
-          ports:
-            - containerPort: 8080
+#### Adherence to the Latest Security Standards: Spring Security continuously updates to reflect the latest standards and practices in the security industry.
 
-```
-
-Apply the yaml to the Kubernetes:
-```
-kubectl apply -f kubernetes/deployment.yaml
-```
-
-See the pod status:
-```
-kubectl get pods -l app=point
-```
-
-If you have no problem, you can connect to the service by opening a proxy between your local and the kubernetes by using this command:
-```
-# new terminal
-kubectl port-forward deploy/point 8080:8080
-
-# another terminal
-http localhost:8080
-```
-
-If you have any problem on running the pod, you can find the reason by hitting this:
-```
-kubectl logs -l app=point
-```
-
-Following problems may be occurred:
-
-1. ImgPullBackOff:  Kubernetes failed to pull the image with the image name you've specified at the deployment.yaml. Please check your image name and ensure you have pushed the image properly.
-1. CrashLoopBackOff: The spring application is not running properly. If you didn't provide the kafka installation on the kubernetes, the application may crash. Please install kafka firstly:
-
-https://labs.msaez.io/#/courses/cna-full/full-course-cna/ops-utility
-
+#### Testability: Spring Security aids in easily writing and executing unit and integration tests related to security configurations.

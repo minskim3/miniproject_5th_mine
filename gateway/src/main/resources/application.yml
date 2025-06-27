@@ -5,43 +5,42 @@ server:
 
 spring:
   profiles: default
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8090/.well-known/jwks.json
   cloud:
     gateway:
-#<<< API Gateway / Routes
       routes:
-        - id: authormanage
-          uri: http://localhost:8082
-          predicates:
-            - Path=/authors/**, 
-        - id: writemanage
-          uri: http://localhost:8083
-          predicates:
-            - Path=/writings/**, /authorStatuses/**
-        - id: ai
-          uri: http://localhost:8084
-          predicates:
-            - Path=/covers/**, /summaries/**, 
-        - id: point
-          uri: http://localhost:8085
-          predicates:
-            - Path=/points/**, 
-        - id: libraryplatform
-          uri: http://localhost:8086
-          predicates:
-            - Path=/libraryInfos/**, 
-        - id: subscribemanage
-          uri: http://localhost:8087
-          predicates:
-            - Path=/subscribers/**, /subscribedBooks/**, /subscribeLists/**
-        - id: outside
-          uri: http://localhost:8088
-          predicates:
-            - Path=, 
-        - id: frontend
-          uri: http://localhost:8080
-          predicates:
-            - Path=/**
-#>>> API Gateway / Routes
+         - id: authormanage
+           uri: http://localhost:8082
+           predicates:
+            - Path=/authors/** 
+         - id: writemanage
+           uri: http://localhost:8083
+           predicates:
+            - Path=/writings/** /authorStatuses/**
+         - id: ai
+           uri: http://localhost:8084
+           predicates:
+            - Path=/covers/**/summaries/** 
+         - id: point
+           uri: http://localhost:8085
+           predicates:
+            - Path=/points/** 
+         - id: libraryplatform
+           uri: http://localhost:8086
+           predicates:
+            - Path=/libraryInfos/** 
+         - id: subscribemanage
+           uri: http://localhost:8087
+           predicates:
+            - Path=/subscribers/**/subscribedBooks/** /subscribeLists/**
+         - id: outside
+           uri: http://localhost:8088
+           predicates:
+            - Path= 
       globalcors:
         corsConfigurations:
           '[/**]':
@@ -58,41 +57,42 @@ spring:
 
 spring:
   profiles: docker
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://oauth:8080/.well-known/jwks.json
   cloud:
     gateway:
       routes:
         - id: authormanage
           uri: http://authormanage:8080
           predicates:
-            - Path=/authors/**, 
+            - Path=/authors/** 
         - id: writemanage
           uri: http://writemanage:8080
           predicates:
-            - Path=/writings/**, 
+            - Path=/writings/** /authorStatuses/**
         - id: ai
           uri: http://ai:8080
           predicates:
-            - Path=/covers/**, /summaries/**, 
+            - Path=/covers/**/summaries/** 
         - id: point
           uri: http://point:8080
           predicates:
-            - Path=/points/**, 
+            - Path=/points/** 
         - id: libraryplatform
           uri: http://libraryplatform:8080
           predicates:
-            - Path=/libraryInfos/**, 
+            - Path=/libraryInfos/** 
         - id: subscribemanage
           uri: http://subscribemanage:8080
           predicates:
-            - Path=/subscribers/**, /subscribedBooks/**, 
+            - Path=/subscribers/**/subscribedBooks/** /subscribeLists/**
         - id: outside
           uri: http://outside:8080
           predicates:
-            - Path=, 
-        - id: frontend
-          uri: http://frontend:8080
-          predicates:
-            - Path=/**
+            - Path= 
       globalcors:
         corsConfigurations:
           '[/**]':
